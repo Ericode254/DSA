@@ -18,8 +18,7 @@ void deleteAtPosition(int position);
 void reverseList();
 void printList();
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   insertFirst(1);
   insertFirst(2);
   insertFirst(3);
@@ -27,7 +26,7 @@ int main(int argc, char *argv[])
   deleteFirst();
   deleteAtPosition(2);
   reverseList();
-  
+
   printList();
 
   return 0;
@@ -35,7 +34,7 @@ int main(int argc, char *argv[])
 
 // a function for creatin a node
 struct Node *createNode(int value) {
-  struct Node *newNode = (struct Node*) malloc(sizeof(struct Node));
+  struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
   newNode->prev = NULL;
   newNode->data = value;
   newNode->next = NULL;
@@ -78,10 +77,10 @@ void insertAtPosition(int value, int position) {
   }
 
   struct Node *temp = head;
-  for (int i = 0; i < position-2; i++) {
+  for (int i = 0; i < position - 2; i++) {
     temp = temp->next;
   }
-  
+
   newNode->next = temp->next;
   temp->next = newNode;
   newNode->prev = temp;
@@ -118,7 +117,7 @@ void deleteAtPosition(int position) {
   }
 
   struct Node *temp = head;
-  for (int i = 0; i < position-2; i++) {
+  for (int i = 0; i < position - 2; i++) {
     temp = temp->next;
   }
 
@@ -127,7 +126,7 @@ void deleteAtPosition(int position) {
   free(temp2);
 }
 
-// a function for reversing the list 
+// a function for reversing the list
 void reverseList() {
   struct Node *current, *next, *prev;
   current = head->next;
