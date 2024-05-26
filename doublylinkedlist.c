@@ -17,6 +17,7 @@ void insertAtPosition(int value, int position);
 void deleteFirst();
 void deleteLast();
 void deleteAtPosition(int position);
+void reverseList();
 void printList();
 
 int main(int argc, char *argv[])
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
   deleteFirst();
   deleteLast();
   deleteAtPosition(3);
+  reverseList();
   printList();
 
   return 0;
@@ -149,6 +151,21 @@ void deleteAtPosition(int position) {
   free(temp2);
 }
 
+// a function for reversing the list 
+void reverseList() {
+  struct Node *current, *next, *prev;
+  current = head;
+  prev = NULL;
+
+  while (current != NULL) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+  }
+
+  head = prev;
+}
 // a function for printing the whole list to the console
 void printList() {
   struct Node *temp = head;
