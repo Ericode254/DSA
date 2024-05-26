@@ -27,6 +27,9 @@ int main(int argc, char *argv[])
   insertLast(5);
   insertLast(6);
   insertAtPosition(7, 3);
+  deleteFirst();
+  deleteLast();
+  deleteAtPosition(3);
   printList();
 
   return 0;
@@ -93,6 +96,57 @@ void insertAtPosition(int value, int position) {
   newNode->next = temp->next;
   temp->next = newNode;
   newNode->prev = temp;
+}
+
+// a function for deleting the first node in the list
+void deleteFirst() {
+  if (head == NULL) {
+    printf("The list is empty");
+    return;
+  }
+
+  struct Node *temp = head;
+  head = head->next;
+  free(temp);
+}
+
+// a function for deleting the last node in the list
+void deleteLast() {
+  if (head == NULL) {
+    printf("The list is empty");
+    return;
+  }
+
+  struct Node *temp = head;
+  while (temp->next->next != NULL) {
+    temp = temp->next;
+  }
+
+  struct Node *temp2 = temp->next;
+  temp->next = NULL;
+  free(temp2);
+}
+
+// a function for deleting a node at any position in the list
+void deleteAtPosition(int position) {
+  if (head == NULL) {
+    printf("The list is empty");
+    return;
+  }
+
+  if (position == 1) {
+    free(head);
+    return;
+  }
+
+  struct Node *temp = head;
+  for (int i = 0; i < position-2; i++) {
+    temp = temp->next;
+  }
+
+  struct Node *temp2 = temp->next;
+  temp->next = temp2->next;
+  free(temp2);
 }
 
 // a function for printing the whole list to the console
