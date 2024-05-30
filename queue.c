@@ -11,7 +11,7 @@ void qstore(char value);
 char qretrieve();
 void printQueue();
 
-int main(int argc, char *argv[])
+int main()
 {
   qstore('A');
   qstore('B');

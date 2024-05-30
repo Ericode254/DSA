@@ -20,7 +20,7 @@ void deleteAtPosition(int position);
 void reverseList();
 void printList();
 
-int main(int argc, char *argv[])
+int main()
 {
   insertFirst(1);
   insertFirst(2);
