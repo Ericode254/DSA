@@ -19,7 +19,7 @@ void deleteAtPosition(int position);
 void reverse();
 void printList();
 
-int main(int argc, char *argv[])
+int main()
 {
   insertNodeLast(1);
   insertNodeLast(2);
