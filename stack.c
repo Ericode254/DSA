@@ -25,7 +25,7 @@ int main()
   return 0;
 }
 
-// a function for checking whether the satck is empty
+// a function for checking whether the stack is empty
 int isEmpty() {
   if (top == -1) {
     return 1;
