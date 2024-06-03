@@ -76,6 +76,7 @@ void Dequeue() {
 int Top() {
   if (front == NULL && rear == NULL) {
     printf("The queue is empty\n");
+    return -1;
   } else {
     return front->data;
   }
