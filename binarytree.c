@@ -10,6 +10,8 @@ struct Node {
 // function declarations
 struct Node *createNode(int value);
 struct Node *insert(struct Node *root, int value);
+int search(struct Node *root, int value);
+void delete(struct Node *root, int value);
 void printTree(struct Node *root);
 
 int main()
@@ -41,7 +43,7 @@ struct Node *insert(struct Node *root, int value) {
   if (root == NULL) {
     return createNode(value);
   } else {
-    if (value < root->data) {
+    if (value <= root->data) {
       root->left = insert(root->left, value);
     } else {
       root->right = insert(root->right, value);
@@ -49,6 +51,19 @@ struct Node *insert(struct Node *root, int value) {
   }
 
   return root;
+}
+
+// a function for searching for an item in the tree
+int search(struct Node *root, int value) {
+  if (root == NULL) {
+    return 0;
+  } else if (value == root->data) {
+    return 1;
+  } else if (value <= root->data) {
+    return search(root->left, value);
+  } else {
+    return search(root->right, value);
+  }
 }
 
 // a function for printing out the contents of the tree
