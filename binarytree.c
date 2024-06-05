@@ -11,7 +11,8 @@ struct Node {
 struct Node *createNode(int value);
 struct Node *insert(struct Node *root, int value);
 int search(struct Node *root, int value);
-void delete(struct Node *root, int value);
+struct Node *delete(struct Node *root, int value);
+int findMin(struct Node *root);
 void printTree(struct Node *root);
 
 int main()
@@ -23,7 +24,11 @@ int main()
   insert(root, 5);
   insert(root, 9);
 
-  printTree(root); 
+  printTree(root);
+
+  int smalllest = findMin(root);
+
+  printf("\nThe smallest value is: %d", smalllest);
 
   return 0;
 }
@@ -64,6 +69,20 @@ int search(struct Node *root, int value) {
   } else {
     return search(root->right, value);
   }
+}
+
+// a function for finding the min of a tree
+int findMin(struct Node *root) {
+  if (root == NULL) {
+    printf("The tree is empty\n");
+    return -1;
+  } 
+
+  while (root->left != NULL) {
+    root = root->left;
+  }
+
+  return root->data;
 }
 
 // a function for printing out the contents of the tree
