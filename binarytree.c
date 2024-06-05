@@ -14,6 +14,7 @@ int search(struct Node *root, int value);
 struct Node *delete(struct Node *root, int value);
 int findMin(struct Node *root);
 int findMax(struct Node *root);
+int findHeight(struct Node *root);
 void printTree(struct Node *root);
 
 int main()
@@ -28,8 +29,10 @@ int main()
   printTree(root);
 
   int smalllest = findMax(root);
+  int height = findHeight(root);
 
   printf("\nThe largest value is: %d", smalllest);
+  printf("\nThe height of the tree is: %d", height);
 
   return 0;
 }
@@ -100,6 +103,27 @@ int findMax(struct Node *root) {
   return root->data;
 }
 
+// a function for finding the height of the tree
+int max(int a, int b) {
+  int largest = 0;
+
+  if (a > b) {
+    largest = a;
+  } else {
+    largest = b;
+  }
+
+  return largest;
+}
+
+int findHeight(struct Node *root) {
+  if (root == NULL) {
+    return -1;
+  }
+
+  return max(findHeight(root->left), findHeight(root->right)) + 1;
+}
+
 // a function for printing out the contents of the tree
 void printTree(struct Node *root) {
   if (root == NULL) {
@@ -111,5 +135,3 @@ void printTree(struct Node *root) {
   printTree(root->right);
 
 }
-
-
