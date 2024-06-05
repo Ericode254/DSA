@@ -13,6 +13,7 @@ struct Node *insert(struct Node *root, int value);
 int search(struct Node *root, int value);
 struct Node *delete(struct Node *root, int value);
 int findMin(struct Node *root);
+int findMax(struct Node *root);
 void printTree(struct Node *root);
 
 int main()
@@ -26,9 +27,9 @@ int main()
 
   printTree(root);
 
-  int smalllest = findMin(root);
+  int smalllest = findMax(root);
 
-  printf("\nThe smallest value is: %d", smalllest);
+  printf("\nThe largest value is: %d", smalllest);
 
   return 0;
 }
@@ -80,6 +81,20 @@ int findMin(struct Node *root) {
 
   while (root->left != NULL) {
     root = root->left;
+  }
+
+  return root->data;
+}
+
+// a function for finding the largest item in the tree
+int findMax(struct Node *root) {
+  if (root == NULL) {
+    printf("The tree is empty");
+    return -1;
+  }
+
+  while (root->right != NULL) {
+    root = root->right;
   }
 
   return root->data;
