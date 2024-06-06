@@ -80,7 +80,7 @@ int findMin(struct Node *root) {
   if (root == NULL) {
     printf("The tree is empty\n");
     return -1;
-  } 
+  }
 
   while (root->left != NULL) {
     root = root->left;
@@ -129,7 +129,7 @@ void printTree(struct Node *root) {
   if (root == NULL) {
     return;
   }
-  
+
   printTree(root->left);
   printf("%d ", root->data);
   printTree(root->right);
