@@ -11,11 +11,13 @@ struct Node {
 struct Node *createNode(int value);
 struct Node *insert(struct Node *root, int value);
 int search(struct Node *root, int value);
-struct Node *delete(struct Node *root, int value);
+struct Node *deleteNode(struct Node *root, int value);
 int findMin(struct Node *root);
 int findMax(struct Node *root);
 int findHeight(struct Node *root);
-void printTree(struct Node *root);
+void preorderTraversal(struct Node *root);
+void inorderTraversal(struct Node *root);
+void postorderTraversal(struct Node *root);
 
 int main()
 {
@@ -26,7 +28,7 @@ int main()
   insert(root, 5);
   insert(root, 9);
 
-  printTree(root);
+  preorderTraversal(root);
 
   int smalllest = findMax(root);
   int height = findHeight(root);
@@ -124,14 +126,34 @@ int findHeight(struct Node *root) {
   return max(findHeight(root->left), findHeight(root->right)) + 1;
 }
 
-// a function for printing out the contents of the tree
-void printTree(struct Node *root) {
+//  functions for printing out the contents of the tree
+void preorderTraversal(struct Node *root) {
   if (root == NULL) {
     return;
   }
 
-  printTree(root->left);
   printf("%d ", root->data);
-  printTree(root->right);
+  preorderTraversal(root->left);
+  preorderTraversal(root->right);
 
+}
+
+void inorderTraversal(struct Node *root) {
+  if (root == NULL) {
+    return;
+  }
+
+  inorderTraversal(root->left);
+  printf("%d ", root->data);
+  inorderTraversal(root->right);
+}
+
+void postorderTraversal(struct Node *root) {
+  if (root == NULL) {
+    return;
+  }
+
+  postorderTraversal(root->left);
+  postorderTraversal(root->right);
+  printf("%d ", root->data);
 }
