@@ -12,7 +12,7 @@ struct Node *createNode(int value);
 struct Node *insert(struct Node *root, int value);
 int search(struct Node *root, int value);
 struct Node *deleteNode(struct Node *root, int value);
-int findMin(struct Node *root);
+struct Node *findMin(struct Node *root);
 int findMax(struct Node *root);
 int findHeight(struct Node *root);
 void preorderTraversal(struct Node *root);
@@ -27,14 +27,9 @@ int main()
   insert(root, 6);
   insert(root, 5);
   insert(root, 9);
-
+  
+  deleteNode(root, 6);
   preorderTraversal(root);
-
-  int smalllest = findMax(root);
-  int height = findHeight(root);
-
-  printf("\nThe largest value is: %d", smalllest);
-  printf("\nThe height of the tree is: %d", height);
 
   return 0;
 }
@@ -78,17 +73,17 @@ int search(struct Node *root, int value) {
 }
 
 // a function for finding the min of a tree
-int findMin(struct Node *root) {
+struct Node  *findMin(struct Node *root) {
   if (root == NULL) {
     printf("The tree is empty\n");
-    return -1;
+    return NULL;
   }
 
   while (root->left != NULL) {
     root = root->left;
   }
 
-  return root->data;
+  return root;
 }
 
 // a function for finding the largest item in the tree
@@ -124,6 +119,39 @@ int findHeight(struct Node *root) {
   }
 
   return max(findHeight(root->left), findHeight(root->right)) + 1;
+}
+
+// a function for deleting a node in the tree
+struct Node *deleteNode(struct Node *root, int value) {
+  if (root == NULL) {
+    return root;
+  } else if (value < root->data) {
+    root->left = deleteNode(root->left, value);
+  } else if (value > root->data) {
+    root->right = deleteNode(root->right, value);
+  } else {
+    if (root->left == NULL && root->right == NULL) {
+      free(root);
+      root = NULL;
+      return root;
+    } else if (root->left == NULL) {
+      struct Node *temp = root;
+      root = root->right;
+      free(temp);
+      return root;
+    } else if (root->right == NULL) {
+      struct Node *temp = root;
+      root = root->left;
+      free(temp);
+      return root;
+    } else {
+      struct Node *temp = findMin(root->right);
+      root->data = temp->data;
+      root->right = deleteNode(root->right, temp->data);
+      return root;
+    }
+  }
+  return root;
 }
 
 //  functions for printing out the contents of the tree
